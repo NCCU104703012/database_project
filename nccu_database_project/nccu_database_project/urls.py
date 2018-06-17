@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^search/$', views.search_Commodity),
     re_path(r'^search_Record/$', views.search_Record),
+    re_path(r'^add_user/$', views.add_user),
+    re_path(r'^set_user/$', views.set_user),
 ]
