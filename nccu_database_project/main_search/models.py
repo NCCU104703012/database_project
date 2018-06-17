@@ -6,8 +6,10 @@ class User(models.Model):
     token = models.AutoField(primary_key=True)  # ID
     name_zh = models.CharField(max_length=50)  # 名稱
     password = models.CharField(max_length=50)  # 密碼
-    location = models.ForeignKey('Location', on_delete=models.CASCADE)  # 地點
     bank = models.ForeignKey('Bank', on_delete=models.CASCADE)  # 銀行
+
+    def __str__(self):
+        return self.name_zh
 
 class Location(models.Model):
     id = models.AutoField(primary_key=True) #
@@ -15,9 +17,15 @@ class Location(models.Model):
     town = models.CharField(max_length=50) #鄉鎮
     district = models.CharField(max_length=50) #區
 
+    def __str__(self):
+        return self.district
+
 class Bank(models.Model):
     id = models.AutoField(primary_key=True)
     name_zh = models.CharField(max_length=50)  # 名稱
+
+    def __str__(self):
+        return self.name_zh
 
 class Record(models.Model):
     id = models.AutoField(primary_key=True) #
@@ -32,9 +40,15 @@ class Company(models.Model): #輸入好供參考
     id = models.AutoField(primary_key=True) #
     name_zh = models.CharField(max_length=50)  #
 
+    def __str__(self):
+        return self.name_zh
+
 class Type(models.Model): #輸入好供參考
     id = models.AutoField(primary_key=True) #
     name_zh = models.CharField(max_length=50)  #
+
+    def __str__(self):
+        return self.name_zh
 
 class Commodity(models.Model):
     id = models.AutoField(primary_key=True) #
@@ -43,7 +57,14 @@ class Commodity(models.Model):
     type = models.ForeignKey('Type', on_delete=models.CASCADE)  # 類型
     describe = models.CharField(max_length=50)  # 描述
     state = models.ForeignKey('State', on_delete=models.CASCADE)  # 狀態
+    location = models.ForeignKey('Location', on_delete=models.CASCADE)  # 地點
+
+    def __str__(self):
+        return self.name_zh
 
 class State(models.Model): #輸入好供參考
     id = models.AutoField(primary_key=True) #
     name_zh = models.CharField(max_length=50)  #
+
+    def __str__(self):
+        return self.name_zh

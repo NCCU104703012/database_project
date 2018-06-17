@@ -19,4 +19,5 @@ from main_search import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    re_path(r'^search/$', views.search),
 ]

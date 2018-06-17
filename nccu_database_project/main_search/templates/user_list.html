@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+  {% for Commodity in filter.qs %}
+    <li>{{ Commodity.id }} - {{ Commodity.own_person.name_zh }} - {{ Commodity.name_zh }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}
