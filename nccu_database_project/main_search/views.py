@@ -46,6 +46,7 @@ def add_commodity(request):
 def set_commodity(request):
     if request.method == "GET":
         own_person_get = request.GET["own_person"]
+        password_get = request.GET["password"]
         name_zh_get = request.GET["name_zh"]
         type_get = request.GET["type"]
         describe_get = request.GET["describe"]
@@ -55,6 +56,9 @@ def set_commodity(request):
 
     own_person_object = User.objects.filter(name_zh = own_person_get )
     if own_person_object.count() != 1 :
+        return render(request, 'set_commodity_fail.html')
+
+    if own_person_object[0].password != password_get :
         return render(request, 'set_commodity_fail.html')
 
     type_object = Type.objects.filter(name_zh = type_get )
@@ -76,5 +80,6 @@ def set_commodity(request):
     commodity.describe = describe_get
     commodity.location = location_object[0]
     commodity.state = state_object[0]
+    commodity.save()
 
     return render(request, 'set_commodity_success.html')
