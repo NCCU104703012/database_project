@@ -19,5 +19,6 @@ from main_search import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^search/$', views.search),
+    re_path(r'^search/$', views.search_Commodity),
+    re_path(r'^search_Record/$', views.search_Record),
 ]
