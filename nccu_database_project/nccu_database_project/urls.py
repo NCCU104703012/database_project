@@ -23,4 +23,6 @@ urlpatterns = [
     re_path(r'^search_Record/$', views.search_Record),
     re_path(r'^add_user/$', views.add_user),
     re_path(r'^set_user/$', views.set_user),
+    re_path(r'^add_commodity/$', views.add_commodity),
+    re_path(r'^set_commodity/$', views.set_commodity),
 ]

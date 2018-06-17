@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from main_search.models import Commodity, User, Record, Bank
+from main_search.models import Commodity, User, Record, Bank, Type, Location, State
 from .filters import CommodityFilter, RecordFilter
 
 # Create your views here.
@@ -39,3 +39,42 @@ def set_user(request):
     user.save()
 
     return render(request, 'set_user_success.html')
+
+def add_commodity(request):
+    return render(request, 'set_commodity.html')
+
+def set_commodity(request):
+    if request.method == "GET":
+        own_person_get = request.GET["own_person"]
+        name_zh_get = request.GET["name_zh"]
+        type_get = request.GET["type"]
+        describe_get = request.GET["describe"]
+        location_get = request.GET["location"]
+    else :
+        return render(request, 'set_commodity_fail.html')
+
+    own_person_object = User.objects.filter(name_zh = own_person_get )
+    if own_person_object.count() != 1 :
+        return render(request, 'set_commodity_fail.html')
+
+    type_object = Type.objects.filter(name_zh = type_get )
+    if type_object.count() != 1 :
+        return render(request, 'set_commodity_fail.html')
+
+    location_object = Location.objects.filter(district = location_get )
+    if location_object.count() != 1 :
+        return render(request, 'set_commodity_fail.html')
+
+    state_object = State.objects.filter(name_zh = 'avaliable' )
+    if state_object.count() != 1 :
+        return render(request, 'set_commodity_fail.html')
+
+    commodity = Commodity()
+    commodity.own_person = own_person_object[0]
+    commodity.name_zh = name_zh_get
+    commodity.type = type_object[0]
+    commodity.describe = describe_get
+    commodity.location = location_object[0]
+    commodity.state = state_object[0]
+
+    return render(request, 'set_commodity_success.html')
