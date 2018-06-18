@@ -29,8 +29,9 @@ class Bank(models.Model):
 
 class Record(models.Model):
     id = models.AutoField(primary_key=True) #
-    quest_person = models.ForeignKey('User', related_name='quest_person', on_delete=models.CASCADE)  # 要求者
-    own_person = models.ForeignKey('User', related_name='own_person', on_delete=models.CASCADE)  # 擁有者
+    commodity_id = models.ForeignKey('Commodity', on_delete=models.CASCADE)
+    quest_person = models.ForeignKey('User', on_delete=models.CASCADE)  # 要求者
+    #own_person = models.ForeignKey('User', related_name='own_person', on_delete=models.CASCADE)  # 擁有者
     name_zh = models.CharField(max_length=50)  # 商品名稱
     type = models.ForeignKey('Type', on_delete=models.CASCADE)  # 類型
     company = models.ForeignKey('Company', on_delete=models.CASCADE) #運送公司

@@ -25,4 +25,6 @@ urlpatterns = [
     re_path(r'^set_user/$', views.set_user),
     re_path(r'^add_commodity/$', views.add_commodity),
     re_path(r'^set_commodity/$', views.set_commodity),
+    re_path(r'^buy_commodity/$', views.buy_commodity),
+    re_path(r'^set_record/$', views.set_record),
 ]

@@ -24,4 +24,4 @@ class RecordFilter(django_filters.FilterSet):
 
     class Meta:
         model = Record
-        fields = ['id', 'quest_person', 'own_person', 'name_zh', 'type', 'company']
+        fields = ['id', 'quest_person', 'name_zh', 'type', 'company']

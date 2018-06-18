@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from main_search.models import Commodity, User, Record, Bank, Type, Location, State
+from main_search.models import Commodity, User, Record, Bank, Type, Location, State, Company
 from .filters import CommodityFilter, RecordFilter
 
 # Create your views here.
@@ -83,3 +83,47 @@ def set_commodity(request):
     commodity.save()
 
     return render(request, 'set_commodity_success.html')
+
+def buy_commodity(request):
+    return render(request, 'buy_commodity.html')
+
+def set_record(request):
+    if request.method == "GET":
+        commodity_id_get = request.GET["commodity_id"]
+        quest_person_get = request.GET["quest_person"]
+        password_get = request.GET["password"]
+        company_get = request.GET["company"]
+        date_get = request.GET["date"]
+    else :
+        return render(request, 'set_record_fail.html')
+
+    try:
+        commodity_id_object = Commodity.objects.filter(id = int(commodity_id_get) )
+    except Exception as e:
+        return render(request, 'set_record_fail.html')
+
+    if commodity_id_object.count() != 1 :
+        return render(request, 'set_record_fail.html')
+
+    quest_person_object = User.objects.filter(name_zh = quest_person_get )
+    if own_person_object.count() != 1 :
+        return render(request, 'set_record_fail.html')
+
+    if quest_person_object[0].password != password_get :
+        return render(request, 'set_record_fail.html')
+
+    company_object = Company.objects.filter(name_zh = company_get )
+    if company_object.count() != 1 :
+        return render(request, 'set_record_fail.html')
+
+    record = Record()
+    record.commodity_id = commodity_id_object[0]
+    record.quest_person = quest_person_object[0]
+    record.name_zh = commodity_id_object[0].name_zh
+    record.type = commodity_id_object[0].type
+    record.company = company_object[0]
+    record.date = date_get
+    record.save()
+
+
+    return render(request, 'set_record_success.html')
