@@ -109,7 +109,7 @@ def set_record(request):
         return render(request, 'set_record_fail.html')
 
     quest_person_object = User.objects.filter(name_zh = quest_person_get )
-    if own_person_object.count() != 1 :
+    if quest_person_object.count() != 1 :
         return render(request, 'set_record_fail.html')
 
     if quest_person_object[0].password != password_get :
@@ -127,5 +127,8 @@ def set_record(request):
     record.company = company_object[0]
     record.date = date_get
     record.save()
+
+    state_object = State.objects.filter(name_zh = 'Unavaliable' )
+    commodity_id_object.update(state = state_object[0] )
 
     return render(request, 'set_record_success.html')
