@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from main_search import views
+from main_search import views, set_attribute
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    re_path(r'^index/$', views.index),
     re_path(r'^search/$', views.search_Commodity),
     re_path(r'^search_Record/$', views.search_Record),
     re_path(r'^add_user/$', views.add_user),
@@ -27,4 +28,10 @@ urlpatterns = [
     re_path(r'^set_commodity/$', views.set_commodity),
     re_path(r'^buy_commodity/$', views.buy_commodity),
     re_path(r'^set_record/$', views.set_record),
+
+    re_path(r'^set_bank/$', set_attribute.set_bank),
+    re_path(r'^set_state/$', set_attribute.set_state),
+    re_path(r'^set_company/$', set_attribute.set_company),
+
+    re_path(r'^$', views.index),
 ]

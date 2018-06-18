@@ -3,6 +3,9 @@ from main_search.models import Commodity, User, Record, Bank, Type, Location, St
 from .filters import CommodityFilter, RecordFilter
 
 # Create your views here.
+def index(request):
+    return render(request, 'index.html')
+
 def search_Commodity(request):
     Commodity_list = Commodity.objects.all()
     Commodity_filter = CommodityFilter(request.GET, queryset=Commodity_list)
@@ -124,6 +127,5 @@ def set_record(request):
     record.company = company_object[0]
     record.date = date_get
     record.save()
-
 
     return render(request, 'set_record_success.html')
