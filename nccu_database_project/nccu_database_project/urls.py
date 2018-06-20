@@ -32,6 +32,9 @@ urlpatterns = [
     re_path(r'^set_bank/$', set_attribute.set_bank),
     re_path(r'^set_state/$', set_attribute.set_state),
     re_path(r'^set_company/$', set_attribute.set_company),
+    re_path(r'^set_type/$', set_attribute.set_type),
+    re_path(r'^set_location/$', set_attribute.set_location),
+
 
     re_path(r'^$', views.index),
 ]
